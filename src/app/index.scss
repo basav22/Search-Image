@@ -1,0 +1,96 @@
+/* Do not remove the comments below. It's the markers used by wiredep to inject
+   sass dependencies when defined in the bower.json of your dependencies */
+// bower:scss
+// endbower
+
+
+@mixin no-padding-horizontal {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.float-none {
+  float: none !important;
+}
+
+.searchImageForm {
+  margin-top: 20px;
+  @include no-padding-horizontal;
+
+  .form-control {
+    @include border-radius(12px);
+  }
+}
+
+///////// pagination styles
+.page-number-container {
+  @include no-padding-horizontal;
+  .page-number-wrapper {
+    margin-top: 10px;
+    padding-right: 0;
+    list-style-type: none;
+
+    >li {
+      float: left;
+      padding: 10px;
+      background: #eee;
+      border: 1px solid #ddd;
+
+      &:hover, &:active {
+        background-color: #ddd;
+        color: #262626;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.search-result-wraper {
+  background-color: #fafafa;
+
+  >.image-panel {
+    border: 1px solid #ddd;
+    @include no-padding-horizontal;
+  }
+}
+
+.image-panel-header, .image-panel-footer {
+  padding: 15px;
+}
+
+.image-panel-footer {
+  .likes {
+    font-size: 1.15em;
+    color: #262626;
+    margin-bottom: 4px;
+  }
+  .date-time {
+    font-size: 0.85em;
+    color: #999;
+  }
+}
+
+.image-panel-body {
+
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+}
+
+.user-name {
+  display: inline-block;
+  margin-left: 4px;
+}
+/* Do not remove the comments below. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector

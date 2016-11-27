@@ -1,0 +1,94 @@
+<!doctype html>
+<html ng-app="prj1" ng-strict-di>
+  <head>
+    <meta charset="utf-8">
+    <title>prj1</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container" ng-controller="SearchImageController as main">
+
+      <!-- Search Form -->
+      <div class="row">
+        <form ng-submit="main.searchImages()"
+            class="col-sm-8 center-block float-none searchImageForm" name="searchImageForm">
+          <div class="form-group">
+            <input ng-model="main.searchQuery" type="text" class="form-control" name="search" placeholder="Search.."/>
+          </div>
+        </form>
+      </div>
+
+      <!-- Search Results -->
+      <div class="row search-result-wraper">
+        <div class="col-sm-8 image-panel center-block float-none">
+          <div class="image-panel-header">
+            <img  src="https://images.unsplash.com/photo-1444656107164-8363d0d6f070?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=95ff96abea05e5670723e9cac14935fe"
+                  alt="profile"
+                  class="img-circle profile-pic"/>
+            <h4 class="user-name">Basavaraj Sonnad</h4>
+
+          </div>
+          <div class="image-panel-body">
+            <img class="img-responsive"
+            src="https://images.unsplash.com/photo-1444656107164-8363d0d6f070?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=95ff96abea05e5670723e9cac14935fe"/>
+          </div>
+          <div class="image-panel-footer">
+            <div class="likes">
+              <i class="glyphicon glyphicon-heart"></i>
+              <span class="likes-cnt">49</span> Likes</div>
+            <div class="date-time">July 7, 2016</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- pagination -->
+      <div class="row">
+        <div class="col-sm-10 page-number-container">
+          <ul class="page-number-wrapper pull-right">
+            <li class="page-number">1</li>
+            <li class="page-number">2</li>
+            <li class="page-number">3</li>
+            <li class="page-number">4</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp/serve,.tmp/partials}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+  </body>
+</html>

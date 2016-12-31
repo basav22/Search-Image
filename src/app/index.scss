@@ -4,6 +4,16 @@
 // endbower
 
 
+/////////// Theme variables //////////////
+$brand-danger : #d9534f;
+$brand-info : #5bc0de;
+$body-bg-color: #fafafa;
+$text-fainted: #b3b3b3;
+$text-fainted-hover: #8f8f8f;
+$custom-black: #262626;
+$faint-border: #ddd;
+
+/////// Mixins
 @mixin no-padding-horizontal {
   padding-left: 0;
   padding-right: 0;
@@ -16,68 +26,118 @@
           border-radius: $radius;
 }
 
+///// Generic Classes
+[ng-cloak] {
+  display: none !important;
+}
+
 .float-none {
   float: none !important;
 }
 
-.searchImageForm {
+///// State container to show error and info messages
+.state-container {
   margin-top: 20px;
-  @include no-padding-horizontal;
+  margin-bottom: 20px;
+  border: 1px solid $faint-border;
+  border-left-width: 5px;
+}
 
-  .form-control {
-    @include border-radius(12px);
+/////// Error state ////////
+.error-container {
+  @extend .state-container;
+  border-left-color: $brand-danger;
+
+  h3 {
+    color: $brand-danger;
   }
+}
+
+/////// Empty State ////////
+.empty-container {
+  @extend .state-container;
+  border-left-color: $brand-info;
+
+  h3 {
+    color: $brand-info;
+  }
+}
+
+.loader-img {
+  margin-top: 50px;
+  width: 66px;
+  height: auto;
+  margin-bottom: 50px;
+}
+
+
+///// Media Query
+@media (max-width: 768px) {
+  .container {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+}
+
+.container {
+  background-color: $body-bg-color;
+}
+
+.searchImageForm {
+  @include no-padding-horizontal;
+  margin-bottom: 20px;
+
+  .search-wrapper {
+    position: relative;
+  }
+
+  .search-clear {
+    font-size: 1.2em;
+    position: absolute;
+    top: 13px;
+    right: 14px;
+    z-index: 100;
+    color: $text-fainted;
+
+    &:hover {
+      color: $text-fainted-hover;
+    }
+  }
+  
 }
 
 ///////// pagination styles
 .page-number-container {
   @include no-padding-horizontal;
-  .page-number-wrapper {
-    margin-top: 10px;
-    padding-right: 0;
-    list-style-type: none;
 
-    >li {
-      float: left;
-      padding: 10px;
-      background: #eee;
-      border: 1px solid #ddd;
-
-      &:hover, &:active {
-        background-color: #ddd;
-        color: #262626;
-        cursor: pointer;
-      }
-    }
-  }
+  margin-top: 10px;
 }
 
 .search-result-wraper {
-  background-color: #fafafa;
-
   >.image-panel {
-    border: 1px solid #ddd;
+    border: 1px solid $faint-border;
     @include no-padding-horizontal;
-  }
-}
 
-.image-panel-header, .image-panel-footer {
-  padding: 15px;
-}
+    .image-panel-header, .image-panel-footer {
+      padding: 15px;
+    }
 
-.image-panel-footer {
-  .likes {
-    font-size: 1.15em;
-    color: #262626;
-    margin-bottom: 4px;
+    .image-panel-footer {
+      .likes {
+        font-size: 1.15em;
+        color: $custom-black;
+        margin-bottom: 4px;
+      }
+      .date-time {
+        font-size: 0.85em;
+        color: $text-fainted;
+      }
+    }
   }
-  .date-time {
-    font-size: 0.85em;
-    color: #999;
-  }
-}
 
-.image-panel-body {
+  >.image-panel + .image-panel {
+    margin-top: 10px;
+  }
 
 }
 

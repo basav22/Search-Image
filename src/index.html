@@ -24,50 +24,77 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+
+
     <div class="container" ng-controller="SearchImageController as main">
+
+      <div class="page-header">
+        <h1>Find My Image <small>By Unsplash</small></h1>
+      </div>
 
       <!-- Search Form -->
       <div class="row">
-        <form ng-submit="main.searchImages()"
+        <form ng-submit="main.onSearchImagesClickHandler()" autocomplete="off"
             class="col-sm-8 center-block float-none searchImageForm" name="searchImageForm">
-          <div class="form-group">
-            <input ng-model="main.searchQuery" type="text" class="form-control" name="search" placeholder="Search.."/>
+
+          <div class="input-group has-feedback search-wrapper">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input ng-model="main.searchQuery" type="text" class="form-control input-lg" name="search" placeholder="Search your mood.."/>
+            <a href="#" class="search-clear" ng-show="main.searchQuery" ng-click="main.resetForm()">
+              <i class="glyphicon glyphicon-remove-circle"></i></a>
           </div>
         </form>
       </div>
 
+      <div class="loader" ng-show="main.showLoader" ng-cloak>
+        <img src="assets/images/loader.gif" class="loader-img center-block" alt="Loading.." />
+      </div>
+
       <!-- Search Results -->
-      <div class="row search-result-wraper">
-        <div class="col-sm-8 image-panel center-block float-none">
+      <div class="row search-result-wraper" ng-show="! main.showLoader" ng-cloak>
+        <h4 ng-if="main.searchTerm" ng-show="main.allImages.length" class="col-sm-offset-2 page-header">
+          Search Results for '{{main.searchTerm}}'</h4>
+        <div class="col-sm-8 image-panel center-block float-none" ng-repeat="pic in main.allImages">
           <div class="image-panel-header">
-            <img  src="https://images.unsplash.com/photo-1444656107164-8363d0d6f070?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=95ff96abea05e5670723e9cac14935fe"
+            <img  ng-src="{{pic.user.profile_image.small}}"
                   alt="profile"
                   class="img-circle profile-pic"/>
-            <h4 class="user-name">Basavaraj Sonnad</h4>
+            <h4 class="user-name" ng-bind="pic.user.name"></h4>
 
           </div>
           <div class="image-panel-body">
             <img class="img-responsive"
-            src="https://images.unsplash.com/photo-1444656107164-8363d0d6f070?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=95ff96abea05e5670723e9cac14935fe"/>
+            ng-src="{{pic.urls.regular}}"/>
           </div>
           <div class="image-panel-footer">
             <div class="likes">
               <i class="glyphicon glyphicon-heart"></i>
-              <span class="likes-cnt">49</span> Likes</div>
-            <div class="date-time">July 7, 2016</div>
+              <span class="likes-cnt" ng-bind="pic.user.total_likes"></span> Likes</div>
+            <div class="date-time" ng-bind="pic.created_at | date:'dd MMM, yyyy'"></div>
           </div>
+        </div>
+        <div ng-show="main.noResults" class="col-sm-8 empty-container center-block float-none">
+          <p>
+            <h3>Oops...</h3> No results found. Try alternate keywords.
+          </p>
+        </div>
+
+        <div ng-show="main.isError" class="col-sm-8 error-container center-block float-none">
+          <p>
+            <h3>Ahhh...</h3> <span>Something went wrong.</span>
+          </p>
         </div>
       </div>
 
-
-      <!-- pagination -->
-      <div class="row">
+      <div class="row" ng-cloak ng-if="main.allPhotosCount">
         <div class="col-sm-10 page-number-container">
-          <ul class="page-number-wrapper pull-right">
-            <li class="page-number">1</li>
-            <li class="page-number">2</li>
-            <li class="page-number">3</li>
-            <li class="page-number">4</li>
+          <span class="pull-right">Page {{main.currentPage}}/ {{main.numOfPages}}</span>
+          <div class="clearfix"></div>
+          <ul class="pagination pull-right">
+            <li class="item" ng-class="{disabled:main.currentPage==1}">
+              <a href="#" ng-click="main.onPrevPageClickHandler()"><span>&lt;</span> Previous page</a></li>
+            <li class="item" ng-class="{disabled: main.currentPage == main.numOfPages}">
+              <a href="#" ng-click="main.onNextPageClickHandler()"><span>&gt;</span> Next page</a></li>
           </ul>
         </div>
       </div>
